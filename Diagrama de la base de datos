@@ -1,0 +1,99 @@
+usuarios
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(100)
+apellido: VARCHAR(100)
+email: VARCHAR(150) (UNIQUE)
+contrasena: VARCHAR(255)
+direccion: VARCHAR(255)
+telefono: VARCHAR(20)
+rol: ENUM('administrador', 'cliente')
+fecha_creacion: TIMESTAMP (DEFAULT CURRENT_TIMESTAMP)
+categorias
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(100)
+descripcion: TEXT
+colecciones
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(100)
+descripcion: TEXT
+proveedores
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(100)
+contacto: VARCHAR(100)
+telefono: VARCHAR(20)
+email: VARCHAR(150)
+marcas
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(100)
+descripcion: TEXT
+productos
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(100)
+descripcion: TEXT
+precio: DECIMAL(10, 2)
+categoria_id: INT (FK a categorias)
+marca_id: INT (FK a marcas)
+proveedor_id: INT (FK a proveedores)
+coleccion_id: INT (FK a colecciones)
+stock: INT
+imagen: VARCHAR(255)
+fecha_creacion: TIMESTAMP (DEFAULT CURRENT_TIMESTAMP)
+tallas
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(10)
+colores
+
+id: INT (PK, AUTO_INCREMENT)
+nombre: VARCHAR(50)
+codigo_hex: VARCHAR(7)
+productos_detalles
+
+id: INT (PK, AUTO_INCREMENT)
+producto_id: INT (FK a productos)
+talla_id: INT (FK a tallas)
+color_id: INT (FK a colores)
+stock: INT
+pedidos
+
+id: INT (PK, AUTO_INCREMENT)
+usuario_id: INT (FK a usuarios)
+fecha_pedido: TIMESTAMP (DEFAULT CURRENT_TIMESTAMP)
+estado: ENUM('pendiente', 'procesado', 'enviado', 'entregado', 'cancelado')
+total: DECIMAL(10, 2)
+pedidos_detalles
+
+id: INT (PK, AUTO_INCREMENT)
+pedido_id: INT (FK a pedidos)
+producto_detalle_id: INT (FK a productos_detalles)
+cantidad: INT
+precio_unitario: DECIMAL(10, 2)
+subtotal: DECIMAL(10, 2)
+pagos
+
+id: INT (PK, AUTO_INCREMENT)
+pedido_id: INT (FK a pedidos)
+metodo_pago: ENUM('tarjeta_credito', 'paypal', 'transferencia_bancaria', 'contrareembolso')
+estado_pago: ENUM('pendiente', 'completado', 'fallido')
+fecha_pago: TIMESTAMP (DEFAULT CURRENT_TIMESTAMP)
+monto: DECIMAL(10, 2)
+envios
+
+id: INT (PK, AUTO_INCREMENT)
+pedido_id: INT (FK a pedidos)
+direccion_envio: VARCHAR(255)
+ciudad: VARCHAR(100)
+codigo_postal: VARCHAR(10)
+estado_envio: ENUM('pendiente', 'enviado', 'entregado')
+fecha_envio: TIMESTAMP
+favoritos
+
+id: INT (PK, AUTO_INCREMENT)
+usuario_id: INT (FK a usuarios)
+producto_id: INT (FK a productos)
